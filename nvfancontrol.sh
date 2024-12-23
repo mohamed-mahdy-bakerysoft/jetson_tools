@@ -11,12 +11,11 @@ while true; do
 		echo "Invalid input. Please enter 'quiet' or 'cool'. Press Ctrl+C to cancel."
 	fi
 done
-echo "Changing fan profile to $MODE"
-echo "Stopping nvfancontrol service"
+echo "Stopping nvfancontrol service..."
 systemctl stop nvfancontrol
 CONFIG_FILE="/etc/nvfancontrol.conf"
 if [ -f "$CONFIG_FILE" ]; then
-	echo "Editing FAN_DEFAULT_PROFILE to $MODE"
+	echo "Changing FAN_DEFAULT_PROFILE to $MODE..."
 	sed -i "s/^[[:space:]]*FAN_DEFAULT_PROFILE[[:space:]].*/	FAN_DEFAULT_PROFILE $MODE/" "$CONFIG_FILE"
 else
 	echo "$CONFIG_FILE not found."
